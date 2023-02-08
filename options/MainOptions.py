@@ -1,0 +1,7 @@
+#Main Game Options
+
+#screen
+S_HEIGHT = 600
+S_WIDTH = 800
+S_BACKGROUND = (255, 255, 255)
+S_REFRESH = 60
