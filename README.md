@@ -9,3 +9,6 @@ This is a simple survival race game built in python with pygame. The object of t
 
 ## Application Modules
 - MainOptions - game options
+- Car - car game object
+- BarrierBlocks - red and white barrier objects
+- Barriers - group of barrier blocks
