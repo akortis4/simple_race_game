@@ -4,6 +4,7 @@ from pygame import Rect
 #import user modules
 from options.MainOptions import S_WIDTH, C_HEIGHT, C_WIDTH, C_Y_START
 
+#class to for creating car object
 class Car():
     def __init__(self):
         self.x_pos = (S_WIDTH/2 - (C_WIDTH/2))
@@ -19,10 +20,16 @@ class Car():
             if self.x_pos <= self.x_min:
                 self.x_pos = self.x_min
             else:
-                self.x_pos -= 10
+                self.x_pos -= 5
         else:
             if self.x_pos >= self.x_max:
                 self.x_pos = self.x_max
             else:
-                self.x_pos += 10
+                self.x_pos += 5
         self.rect = Rect(self.x_pos, C_Y_START, C_WIDTH, C_HEIGHT)
+
+    def get_left_x_pos(self):
+        return self.x_pos
+
+    def get_right_x_pos(self):
+        return self.x_pos + C_WIDTH
