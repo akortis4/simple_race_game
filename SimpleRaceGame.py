@@ -39,6 +39,7 @@ class SimpleRace():
                 print('collision')
                 self.run_game = False
             pygame.display.flip()
+            self.barrier_update()
 
     def draw_objects(self):
         pygame.draw.rect(self.display, mo.GREEN, self.car.get_rect())
@@ -59,6 +60,11 @@ class SimpleRace():
             if self.car.get_right_x_pos() >= right_pos:
                 collision = True
         return collision
+
+    def barrier_update(self):
+        self.barriers.forward_barriers()
+        self.barriers.remove_barriers()
+        self.barriers.add_barriers()
 
 if __name__ == '__main__':
     SimpleRace().run()

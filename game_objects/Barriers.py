@@ -2,13 +2,14 @@
 from math import ceil
 
 #import user modules
-from options.MainOptions import B_HEIGHT, B_WIDTH, S_HEIGHT, B_Y_START, B_L_START, B_INIT_WIDTH
+from options.MainOptions import B_HEIGHT, B_WIDTH, S_HEIGHT, B_Y_START, B_L_START, B_INIT_WIDTH, B_REMOVE, B_CREATE
 from game_objects.BarrierBlocks import BarrierBlocks
 
 #class to hold info for all barriers
 class Barriers():
     def __init__(self):
         self.barriers = [[], []]
+        self.width = B_INIT_WIDTH
         self.create_barriers()
 
     def create_barriers(self):
@@ -16,7 +17,7 @@ class Barriers():
         shift = 0
         for i in range(num_r_w_blocks):
             self.barriers[0].append(BarrierBlocks((B_L_START - int(B_WIDTH/2)), B_Y_START+shift))
-            self.barriers[1].append(BarrierBlocks(((B_L_START + B_INIT_WIDTH) - int(B_WIDTH/2)), B_Y_START+shift))
+            self.barriers[1].append(BarrierBlocks(((B_L_START + self.width) - int(B_WIDTH/2)), B_Y_START+shift))
             shift += (B_HEIGHT*2)
 
     def get_barriers(self):
@@ -37,3 +38,19 @@ class Barriers():
                 if right_pos not in right_inner:
                     right_inner.append(right_pos)
         return left_inner, right_inner
+
+    def forward_barriers(self):
+        for i in range(self.get_barrier_length()):
+            self.barriers[0][i].update_y_pos(4)
+            self.barriers[1][i].update_y_pos(4)
+
+    def remove_barriers(self):
+        if self.barriers[0][-1].get_white_y_pos() > B_REMOVE:
+            self.barriers[0] = self.barriers[0][:-1]
+            self.barriers[1] = self.barriers[1][:-1]
+    
+    def add_barriers(self):
+        if self.barriers[0][0].get_white_y_pos() >= B_CREATE:
+            self.barriers[0].insert(0, BarrierBlocks((B_L_START - int(B_WIDTH/2)), B_Y_START))
+            self.barriers[1].insert(0, BarrierBlocks(((B_L_START + self.width) - int(B_WIDTH/2)), B_Y_START))
+        print(self.get_barrier_length())

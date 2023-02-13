@@ -29,3 +29,11 @@ class BarrierBlocks():
 
     def get_red_y_pos(self):
         return self.y_pos + (B_HEIGHT * 2)
+
+    def update_y_pos(self, y_pos):
+        self.y_pos += y_pos
+        self.recreate_recs()
+
+    def recreate_recs(self):
+        self.white_rect = Rect(self.x_pos, self.y_pos, B_WIDTH, B_HEIGHT)
+        self.red_rect = Rect(self.x_pos, self.y_pos+B_HEIGHT, B_WIDTH, B_HEIGHT)
