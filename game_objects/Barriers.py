@@ -5,7 +5,7 @@ from random import randint
 #import user modules
 from options.MainOptions import (B_HEIGHT, B_WIDTH, S_HEIGHT, B_Y_START, 
                                 B_L_START, B_INIT_WIDTH, B_REMOVE, B_CREATE,
-                                S_WIDTH)
+                                S_WIDTH, B_VELOCITY, C_WIDTH)
 from game_objects.BarrierBlocks import BarrierBlocks
 
 #class to hold info for all barriers
@@ -45,8 +45,8 @@ class Barriers():
 
     def forward_barriers(self):
         for i in range(self.get_barrier_length()):
-            self.barriers[0][i].update_y_pos(4)
-            self.barriers[1][i].update_y_pos(4)
+            self.barriers[0][i].update_y_pos(B_VELOCITY)
+            self.barriers[1][i].update_y_pos(B_VELOCITY)
 
     def remove_barriers(self):
         if self.barriers[0][-1].get_white_y_pos() > B_REMOVE:
@@ -71,3 +71,9 @@ class Barriers():
                 self.x_pos = S_WIDTH - B_WIDTH - self.width
         else:
             self.x_pos = self.x_pos
+
+    def shift_barriers(self):
+        if (self.width - B_WIDTH) <= C_WIDTH:
+            self.width = B_WIDTH + 10
+        else:
+            self.width -= B_WIDTH

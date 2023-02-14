@@ -4,6 +4,8 @@
 S_HEIGHT = 600
 S_WIDTH = 800
 S_REFRESH = 60
+S_FONT_SIZE = 30
+S_FONT_STYLE = 'Consolas'
 
 #colors
 GRAY = (128, 128, 128)
@@ -11,11 +13,13 @@ RED = (255, 0, 0)
 BLUE = (0, 0, 255)
 GREEN = (0, 255, 0)
 WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
 
 #car
 C_WIDTH = 50
 C_HEIGHT = 70
-C_Y_START = 475
+C_Y_START = 375
+C_MOVE = 5
 
 #barrier
 B_Y_START = -140
@@ -25,3 +29,5 @@ B_WIDTH = 20
 B_HEIGHT = 35
 B_REMOVE = 670
 B_CREATE = -70
+B_SHRINK_TIME = 3
+B_VELOCITY = 7
