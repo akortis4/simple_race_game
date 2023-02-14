@@ -1,8 +1,11 @@
 #import modules
 from math import ceil
+from random import randint
 
 #import user modules
-from options.MainOptions import B_HEIGHT, B_WIDTH, S_HEIGHT, B_Y_START, B_L_START, B_INIT_WIDTH, B_REMOVE, B_CREATE
+from options.MainOptions import (B_HEIGHT, B_WIDTH, S_HEIGHT, B_Y_START, 
+                                B_L_START, B_INIT_WIDTH, B_REMOVE, B_CREATE,
+                                S_WIDTH)
 from game_objects.BarrierBlocks import BarrierBlocks
 
 #class to hold info for all barriers
@@ -10,6 +13,7 @@ class Barriers():
     def __init__(self):
         self.barriers = [[], []]
         self.width = B_INIT_WIDTH
+        self.x_pos = B_L_START - int(B_WIDTH/2)
         self.create_barriers()
 
     def create_barriers(self):
@@ -51,6 +55,19 @@ class Barriers():
     
     def add_barriers(self):
         if self.barriers[0][0].get_white_y_pos() >= B_CREATE:
-            self.barriers[0].insert(0, BarrierBlocks((B_L_START - int(B_WIDTH/2)), B_Y_START))
-            self.barriers[1].insert(0, BarrierBlocks(((B_L_START + self.width) - int(B_WIDTH/2)), B_Y_START))
-        print(self.get_barrier_length())
+            self.x_pos_shift()
+            self.barriers[0].insert(0, BarrierBlocks(self.x_pos, B_Y_START))
+            self.barriers[1].insert(0, BarrierBlocks((self.x_pos + self.width), B_Y_START))
+
+    def x_pos_shift(self):
+        r_shift = randint(1, 9)
+        if r_shift <= 3:
+            self.x_pos -= B_WIDTH
+            if self.x_pos <= 0:
+                self.x_pos = 0
+        elif 3 < r_shift <= 6:
+            self.x_pos += B_WIDTH
+            if (self.x_pos + self.width + B_WIDTH) >= S_WIDTH:
+                self.x_pos = S_WIDTH - B_WIDTH - self.width
+        else:
+            self.x_pos = self.x_pos
